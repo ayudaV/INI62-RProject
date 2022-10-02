@@ -6,10 +6,9 @@ cepagri <- read.csv("./cepagri.csv", header = FALSE, sep = ";", col.names = name
 cepagri$temp <- as.numeric(cepagri$temp)
 cepagri <- na.omit(cepagri) 
 
-cepagri$horario <- as.POSIXct(cepagri$horario,format="%d/%m/%Y-%H:%M",tz=Sys.timezone())
+cepagri$horario <- as.POSIXlt(cepagri$horario,format="%d/%m/%Y-%H:%M",tz=Sys.timezone())
 
 cepagri <- subset(cepagri, sensa <= 60)
-
-#cepagri = subset(cepagri, umid >= 10)
+cepagri <- subset(cepagri, umid > 10)
 
 summary(cepagri)
