@@ -9,6 +9,8 @@ cepagri <- na.omit(cepagri)
 cepagri$horario <- as.POSIXlt(cepagri$horario,format="%d/%m/%Y-%H:%M",tz=Sys.timezone())
 
 cepagri <- subset(cepagri, sensa <= 60)
+cepagri <- subset(cepagri, sensa >= 0)
+
 cepagri <- subset(cepagri, umid > 10)
 
 summary(cepagri)
