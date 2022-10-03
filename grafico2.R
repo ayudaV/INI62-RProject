@@ -5,14 +5,14 @@ data_temp_mes <- data.frame(
 )
 ggplot(data = data_temp_mes, aes(x = name, y = value)) +
   geom_bar(stat = "identity", fill = "purple") +
-  labs(title = "Temperatura média de cada ano",
+  labs(title = "Temperatura média de cada mês",
        x = "Ano", y = "Temperatura ºC")
 
 barplot(height = data_temp_mes$value,names=data_temp_mes$name,col = "#69b3a2", main = "Temperatura média dos meses")
 
 
 
-temp_ano <- tapply(cepagri$temp, cepagri$horario$year + 1900, mean)
+temp_ano <- tapply(cepagri$temp, format(cepagri$horario, "%Y"), mean)
 data_temp_ano <- data.frame(
   name = names(temp_ano),
   value=temp_ano
@@ -64,21 +64,3 @@ ggplot(data = ca, aes(x = name, y = value)) +
        x = "Ano", y = "Temperatura ºC")
 
 
-
-umid_mes <- tapply(cepagri$umid, cepagri$horario$mon, mean)
-
-library(plotly)
-
-dat1 <- data.frame(
-  value= c("Temp", "Umid", "Sensa"),
-  name = factor(month.abb, levels=unique(month.abb)),
-  total_bill = c(cepagri$temp, umid_mes, cepagri$sensa)
-)
-
-p <- ggplot(data=dat1, aes(x=name, y=value, group=total_bill)) +
-  geom_line() +
-  geom_point()
-
-fig <- ggplotly(p)
-
-fig
