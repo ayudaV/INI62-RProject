@@ -13,4 +13,5 @@ cepagri <- subset(cepagri, sensa >= 0)
 
 cepagri <- subset(cepagri, umid > 10)
 
+
 summary(cepagri)
