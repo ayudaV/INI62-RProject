@@ -35,5 +35,3 @@ ggplot(c2016, aes(umid, sensa)) +
        x = "Umidade %", y = "Sensação Termica ºC")
 
 
-
-summary(cepagri)

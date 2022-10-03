@@ -32,35 +32,3 @@ data_temp_hora <- data.frame(
 barplot(height = data_temp_hora$value,names=data_temp_hora$name,col = "#69b3a2", main = "Temperatura média de cada horário do dia")
 
 
-temp_hora <- tapply(cepagri$temp, format(cepagri$horario, format="%H"), mean)
-
-library(ggplot2)
-library(hrbrthemes)
-
-# create data
-xValue <- 1:24
-yValue <- temp_hora
-data <- data.frame(xValue,yValue)
-
-# Plot
-ggplot(data, aes(x=xValue, y=yValue)) +
-  geom_line( color="#69b3a2", size=1, alpha=0.9, linetype=1) +
-  theme_ipsum() +
-  labs(title = "Temperatura  x Horário",
-       x = "Hora do dia", y = "Temperatura ºC")
-
-umid_mes <- tapply(cepagri$umid, cepagri$horario$mon, mean)
-umid_mes
-
-ca <- data.frame(
-  name = factor(month.abb, levels=unique(month.abb)),
-  value=umid_mes
-)
-ca
-ggplot(data = ca, aes(x = name, y = value)) +
-  geom_bar(stat = "identity", fill = "purple") +
-  geom_line( color="#69b3a2", size=1, alpha=0.9, linetype=1) +
-  labs(title = "Temperatura média de cada ano",
-       x = "Ano", y = "Temperatura ºC")
-
-
